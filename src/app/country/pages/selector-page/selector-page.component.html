@@ -2,11 +2,41 @@
 <hr />
 
 <form autocomplete="off" [formGroup]="myForm" (ngSubmit)="onSave()">
+  <!-- Regions -->
   <div class="row mt-3">
     <div class="col-12 col-md-6">
       <label class="form-label">Continente:</label>
       <select class="form-control" formControlName="region">
-        <option value="">-- Seleccione el continente --</option>
+        <option value="">-- Seleccione un Continente --</option>
+        <option *ngFor="let region of regions" [value]="region">
+          {{ region }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Countries -->
+  <div class="row mt-3" *ngIf="countries.length > 0">
+    <div class="col-12 col-md-6">
+      <label class="form-label">Paises:</label>
+      <select class="form-control" formControlName="country">
+        <option value="">-- Seleccione un País --</option>
+        <option *ngFor="let country of countries" [value]="country.cca3">
+          {{ country.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Borders -->
+  <div class="row mt-3" *ngIf="borders.length > 0">
+    <div class="col-12 col-md-6">
+      <label class="form-label">Fronteras:</label>
+      <select class="form-control" formControlName="borders">
+        <option value="">-- Seleccione la Frontera --</option>
+        <option *ngFor="let country of borders" [value]="country.cca3">
+          {{ country.name }}
+        </option>
       </select>
     </div>
   </div>
@@ -14,3 +44,4 @@
 
 <h3 class="mt-4">Formulario</h3>
 <code>{{ myForm.value | json }}</code>
+<p>Is valid form: {{ myForm.valid }}</p>
